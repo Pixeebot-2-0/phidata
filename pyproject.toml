@@ -19,6 +19,7 @@ dependencies = [
   "tomli",
   "typer",
   "typing-extensions",
+  "defusedxml==0.7.1",
 ]
 
 [project.optional-dependencies]
