@@ -19,6 +19,7 @@ dependencies = [
   "tomli",
   "typer",
   "typing-extensions",
+  "fickling>=0.1.3,~=0.1.0",
 ]
 
 [project.optional-dependencies]
