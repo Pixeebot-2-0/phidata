@@ -3,6 +3,7 @@ from typing import List, Optional, Union
 
 from phi.tools import Toolkit
 from phi.utils.log import logger
+from security import safe_command
 
 
 class ShellTools(Toolkit):
@@ -30,7 +31,7 @@ class ShellTools(Toolkit):
             logger.info(f"Running shell command: {args}")
             if self.base_dir:
                 args = ["cd", str(self.base_dir), ";"] + args
-            result = subprocess.run(args, capture_output=True, text=True)
+            result = safe_command.run(subprocess.run, args, capture_output=True, text=True)
             logger.debug(f"Result: {result}")
             logger.debug(f"Return code: {result.returncode}")
             if result.returncode != 0:
