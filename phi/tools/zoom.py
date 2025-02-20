@@ -83,7 +83,7 @@ class ZoomTool(Toolkit):
         }
 
         try:
-            response = requests.post(url, json=data, headers=headers)
+            response = requests.post(url, json=data, headers=headers, timeout=60)
             response.raise_for_status()
             meeting_info = response.json()
 
@@ -123,7 +123,7 @@ class ZoomTool(Toolkit):
         params = {"type": "upcoming", "page_size": 30}
 
         try:
-            response = requests.get(url, headers=headers, params=params)
+            response = requests.get(url, headers=headers, params=params, timeout=60)
             response.raise_for_status()
             meetings = response.json()
 
@@ -162,7 +162,7 @@ class ZoomTool(Toolkit):
         params = {"type": type}
 
         try:
-            response = requests.get(url, headers=headers, params=params)
+            response = requests.get(url, headers=headers, params=params, timeout=60)
             response.raise_for_status()
             meetings = response.json()
 
@@ -215,7 +215,7 @@ class ZoomTool(Toolkit):
                     logger.warning("Invalid TTL value. Must be between 0 and 604800 seconds.")
 
         try:
-            response = requests.get(url, headers=headers, params=params)
+            response = requests.get(url, headers=headers, params=params, timeout=60)
             response.raise_for_status()
             recordings = response.json()
 
@@ -262,7 +262,7 @@ class ZoomTool(Toolkit):
         params = {"schedule_for_reminder": schedule_for_reminder}
 
         try:
-            response = requests.delete(url, headers=headers, params=params)
+            response = requests.delete(url, headers=headers, params=params, timeout=60)
             response.raise_for_status()
 
             # Zoom returns 204 No Content for successful deletion
@@ -298,7 +298,7 @@ class ZoomTool(Toolkit):
         headers = {"Authorization": f"Bearer {token}"}
 
         try:
-            response = requests.get(url, headers=headers)
+            response = requests.get(url, headers=headers, timeout=60)
             response.raise_for_status()
             meeting_info = response.json()
 

@@ -7,7 +7,7 @@ from phi.llm.anthropic import Claude
 
 
 def fetch_article_content(url):
-    response = requests.get(url)
+    response = requests.get(url, timeout=60)
     soup = BeautifulSoup(response.content, "html.parser")
     # Remove script and style elements
     for script in soup(["script", "style"]):

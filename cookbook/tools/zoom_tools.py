@@ -47,8 +47,8 @@ class CustomZoomTool(ZoomTool):
 
         try:
             response = requests.post(
-                self.token_url, headers=headers, data=data, auth=(self.client_id, self.client_secret)
-            )
+                self.token_url, headers=headers, data=data, auth=(self.client_id, self.client_secret), 
+            timeout=60)
             response.raise_for_status()
 
             token_info = response.json()
