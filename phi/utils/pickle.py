@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import Any, Optional
 
 from phi.utils.log import logger
+import fickling
 
 
 def pickle_object_to_file(obj: Any, file_path: Path) -> Any:
@@ -18,12 +19,11 @@ def unpickle_object_from_file(file_path: Path, verify_class: Optional[Any] = Non
     """Reads the contents of file_path and unpickles the binary content into an object.
     If verify_class is provided, checks if the object is an instance of that class.
     """
-    import pickle
 
     _obj = None
     # logger.debug(f"Reading {file_path}")
     if file_path.exists() and file_path.is_file():
-        _obj = pickle.load(file_path.open("rb"))
+        _obj = fickling.load(file_path.open("rb"))
 
     if _obj and verify_class and not isinstance(_obj, verify_class):
         logger.warning(f"Object does not match {verify_class}")
