@@ -4,6 +4,7 @@ from phi.docker.api_client import DockerApiClient
 from phi.docker.resource.base import DockerResource
 from phi.cli.console import print_info, console
 from phi.utils.log import logger
+from security import safe_command
 
 
 class DockerImage(DockerResource):
@@ -151,7 +152,7 @@ class DockerImage(DockerResource):
 
             # Run the command
             logger.debug("Running command: {}".format(" ".join(command)))
-            result = subprocess.run(command)
+            result = safe_command.run(subprocess.run, command)
 
             # Handling output and errors
             if result.returncode == 0:

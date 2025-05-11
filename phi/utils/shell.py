@@ -1,6 +1,7 @@
 from typing import List
 
 from phi.utils.log import logger
+from security import safe_command
 
 
 def run_shell_command(args: List[str], tail: int = 100) -> str:
@@ -9,7 +10,7 @@ def run_shell_command(args: List[str], tail: int = 100) -> str:
     import subprocess
 
     try:
-        result = subprocess.run(args, capture_output=True, text=True)
+        result = safe_command.run(subprocess.run, args, capture_output=True, text=True)
         logger.debug(f"Result: {result}")
         logger.debug(f"Return code: {result.returncode}")
         if result.returncode != 0:
