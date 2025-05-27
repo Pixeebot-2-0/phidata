@@ -1,13 +1,13 @@
 # Inspired by: https://github.com/anthropics/anthropic-cookbook/blob/main/misc/prompt_caching.ipynb
-import requests
 from bs4 import BeautifulSoup
 
 from phi.assistant import Assistant
 from phi.llm.anthropic import Claude
+from security import safe_requests
 
 
 def fetch_article_content(url):
-    response = requests.get(url)
+    response = safe_requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
     # Remove script and style elements
     for script in soup(["script", "style"]):

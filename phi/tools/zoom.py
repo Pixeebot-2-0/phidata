@@ -3,6 +3,7 @@ import json
 from typing import Optional
 from phi.tools.toolkit import Toolkit
 from phi.utils.log import logger
+from security import safe_requests
 
 
 class ZoomTool(Toolkit):
@@ -123,7 +124,7 @@ class ZoomTool(Toolkit):
         params = {"type": "upcoming", "page_size": 30}
 
         try:
-            response = requests.get(url, headers=headers, params=params)
+            response = safe_requests.get(url, headers=headers, params=params)
             response.raise_for_status()
             meetings = response.json()
 
@@ -162,7 +163,7 @@ class ZoomTool(Toolkit):
         params = {"type": type}
 
         try:
-            response = requests.get(url, headers=headers, params=params)
+            response = safe_requests.get(url, headers=headers, params=params)
             response.raise_for_status()
             meetings = response.json()
 
@@ -215,7 +216,7 @@ class ZoomTool(Toolkit):
                     logger.warning("Invalid TTL value. Must be between 0 and 604800 seconds.")
 
         try:
-            response = requests.get(url, headers=headers, params=params)
+            response = safe_requests.get(url, headers=headers, params=params)
             response.raise_for_status()
             recordings = response.json()
 
@@ -298,7 +299,7 @@ class ZoomTool(Toolkit):
         headers = {"Authorization": f"Bearer {token}"}
 
         try:
-            response = requests.get(url, headers=headers)
+            response = safe_requests.get(url, headers=headers)
             response.raise_for_status()
             meeting_info = response.json()
 
