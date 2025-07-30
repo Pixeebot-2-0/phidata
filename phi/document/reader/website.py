@@ -1,5 +1,4 @@
 import time
-import random
 from typing import Set, Dict, List, Tuple
 from urllib.parse import urljoin, urlparse
 
@@ -8,6 +7,7 @@ from phi.document.reader.base import Reader
 from phi.utils.log import logger
 
 import httpx
+import secrets
 
 try:
     from bs4 import BeautifulSoup  # noqa: F401
@@ -31,7 +31,7 @@ class WebsiteReader(Reader):
         :param min_seconds: Minimum number of seconds to delay. Default is 1.
         :param max_seconds: Maximum number of seconds to delay. Default is 3.
         """
-        sleep_time = random.uniform(min_seconds, max_seconds)
+        sleep_time = secrets.SystemRandom().uniform(min_seconds, max_seconds)
         time.sleep(sleep_time)
 
     def _get_primary_domain(self, url: str) -> str:
